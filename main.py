@@ -7,18 +7,6 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-
-@app.route("/write-history", methods=["GET"])
-def write_history():
-    args = request.args
-
-    try:
-        request_to_GPT.history_to_bd(args['mainCharacter'], args['mood'], args['settingStory'])
-    except Exception as e:
-        print(e)
-        return jsonify({"ok": False, "error": str(e)}), 500
-
-
 @app.route("/write-decision-history-1", methods=["GET"])
 def write_decision_history1():
     args = request.args
