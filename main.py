@@ -7,6 +7,7 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+
 @app.route("/write-decision-history-1", methods=["GET"])
 def write_decision_history1():
     args = request.args

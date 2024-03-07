@@ -41,12 +41,13 @@ def create_history_part1(mood, main_character, place):
                                               f"with an alternative plot direction relative to other plot development "
                                               f"options. (No need to write in the reply:  The standard version of the "
                                               f"plot development, which goes on by itself, etc.)"}]
-    chat = openai.ChatCompletion.create(
+    completion = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages,
         temperature=0.8
     )
-    history = chat.choices[0].message.content
+
+    history = completion.choices[0].message.content
     print(history)
     title_en, title_ru, paragraphs_en, paragraphs_ru, summary, choices_en, choices_ru \
         = utils.process_history_part1(history)
@@ -67,14 +68,12 @@ def create_history_part2(id_history, decision):
                                               f"tests. Internal growth and change. Conclusion: Resolution of the "
                                               f"remaining subheadings and problems. A satisfactory conclusion to the "
                                               f"story."}]
-    chat = openai.ChatCompletion.create(
+    completion = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages,
         temperature=0.8
     )
-    history = chat.choices[0].message.content
+
+    history = completion.choices[0].message.content
     paragraphs_en, paragraphs_ru = utils.process_history_part2(history)
     db.add_history_part2(int(id_history), paragraphs_en, paragraphs_ru)
-
-
-# create_history_part1('adventure', 'women', 'castle')

@@ -10,22 +10,6 @@ db = firestore.client()
 collection_name = 'fairytales_AI'
 
 
-def add_history(settings, history, annotation):
-    set_story = settings+number_history(settings)
-    doc_ref = db.collection(collection_name).document(set_story)
-    doc_ref.set({"id": set_story, "name": history[0],  "annotation": annotation, "history": history[1:]})
-
-
-def number_history(id_history):
-    collection_ref = db.collection('fairytales')
-    docs = collection_ref.stream()
-    count = 0
-    for doc in docs:
-        if id_history in doc.id:
-            count += 1
-    return str(count)
-
-
 def add_history_part1(title_en, title_ru, mood, main_character, place, history_en, history_ru, summary,
                       decisions_en, decisions_ru):
     id_history = random.randint(100000, 999999999999)
