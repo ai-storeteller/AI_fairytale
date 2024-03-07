@@ -1,9 +1,16 @@
-import openai
+from openai import OpenAI
+import httpx
+from httpx_socks import SyncProxyTransport
 
 import db
 import utils
 
-openai.api_key = "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"
+API_KEY = "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"
+PROXY = "socks5://artem:g1yT7EsvIvIiklu4Fu5c@proxies.ddns.net:5020"
+client = OpenAI(
+    api_key=API_KEY,
+    http_client=httpx.Client(transport=SyncProxyTransport.from_url(PROXY))
+)
 
 
 def create_history_part1(mood, main_character, place):
@@ -41,7 +48,7 @@ def create_history_part1(mood, main_character, place):
                                               f"with an alternative plot direction relative to other plot development "
                                               f"options. (No need to write in the reply:  The standard version of the "
                                               f"plot development, which goes on by itself, etc.)"}]
-    completion = openai.chat.completions.create(
+    completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages,
         temperature=0.8
@@ -68,7 +75,7 @@ def create_history_part2(id_history, decision):
                                               f"tests. Internal growth and change. Conclusion: Resolution of the "
                                               f"remaining subheadings and problems. A satisfactory conclusion to the "
                                               f"story."}]
-    completion = openai.chat.completions.create(
+    completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages,
         temperature=0.8
