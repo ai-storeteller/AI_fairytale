@@ -1,0 +1,13 @@
+[Unit]
+Description=AI fairytale
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/AI_fairytale
+ExecStart=/root/AI_fairytale/venv/bin/waitress-serve --call 'main:create_app'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 import decision_history
 
@@ -29,6 +30,13 @@ def write_decision_history2():
     except Exception as e:
         print(e)
         return jsonify({"ok": False, "error": str(e)}), 500
+
+
+def create_app():
+    app.wsgi_app = ProxyFix(
+        app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+    )
+    return app
 
 
 if __name__ == '__main__':
