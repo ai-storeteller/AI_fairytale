@@ -1,0 +1,10 @@
+.idea/
+
+.venv/
+venv/
+
+AI_fairytale.egg-info/
+build/
+dist/
+
+summarizator/
