@@ -3,7 +3,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 
-path_to_key = "fairytale-1313a-firebase-adminsdk-rs66q-c2e5e58588.json"
+path_to_key = "fairytale-ai-5aa59-firebase-adminsdk-ys8ug-c369a0a224.json"
 cred = credentials.Certificate(path_to_key)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
