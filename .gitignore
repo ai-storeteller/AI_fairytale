@@ -7,5 +7,6 @@ venv/
 AI_fairytale.egg-info/
 build/
 dist/
+__pycache__/
 
 summarizator/
