@@ -5,7 +5,7 @@ from httpx_socks import SyncProxyTransport
 import db
 import utils
 
-API_KEY = "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"
+API_KEY = "YOUR_API_KEY"
 PROXY = "socks5://artem:g1yT7EsvIvIiklu4Fu5c@proxies.ddns.net:5020"
 client = OpenAI(
     api_key=API_KEY,
